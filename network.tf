@@ -13,7 +13,9 @@ resource "aws_subnet" "example_subnet_a" {
   availability_zone = "ap-northeast-1a"
   map_public_ip_on_launch = true
 
-  tags = "example-subnet-a"
+  tags = {
+    Name = "example-subnet-a"
+  }
 }
 
 resource "aws_internet_gateway" "example_igw" {
