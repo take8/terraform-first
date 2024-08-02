@@ -33,3 +33,9 @@ resource "aws_route_table" "example_route_table" {
     Name = "example-route-table"
   }
 }
+
+resource "aws_route" "example_route" {
+  route_table_id = aws_route_table.example_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.example_igw.id
+}
