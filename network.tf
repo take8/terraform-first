@@ -15,3 +15,11 @@ resource "aws_subnet" "example_subnet_a" {
 
   tags = "example-subnet-a"
 }
+
+resource "aws_internet_gateway" "example_igw" {
+  vpc_id = aws_vpc.example_vpc.id
+
+  tags = {
+    Name = "example-igw"
+  }
+}
