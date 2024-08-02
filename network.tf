@@ -25,3 +25,11 @@ resource "aws_internet_gateway" "example_igw" {
     Name = "example-igw"
   }
 }
+
+resource "aws_route_table" "example_route_table" {
+  vpc_id = aws_vpc.example_vpc.id
+
+  tags = {
+    Name = "example-route-table"
+  }
+}
