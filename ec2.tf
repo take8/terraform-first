@@ -27,3 +27,24 @@ resource "aws_security_group_rule" "example_ec2_out" {
   to_port = 0
   cidr_blocks = ["0.0.0.0/0"]
 }
+
+resource "aws_instance" "example_ec2" {
+  instance_type = "t2.micro"
+  ami = "ami-0b9593848b0f1934e" # AL2023 x86
+  subnet_id = aws_subnet.example_subnet_a.id
+  vpc_security_group_ids = [
+    aws_security_group.example_ec2_sg.id
+  ]
+  user_data = <<EOF
+#!/bin/bash
+dnf update -y
+dnf install -y httpd
+uname -n > /var/www/html/index.html
+systemctl start httpd
+systemctl enable httpd
+EOF
+
+  tags = {
+    Name = "example-ec2"
+  }
+}
